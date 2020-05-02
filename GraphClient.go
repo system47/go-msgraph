@@ -166,6 +166,19 @@ func (g *GraphClient) ListUsers() (Users, error) {
 	return marsh.Users, err
 }
 
+// GetAccountEnabledUsers returns a list of all users with the "accountEnabled" flag set to true
+//
+// Reference: https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/user_list
+func (g *GraphClient) ListAccountEnabledUsers() (Users, error) {
+	resource := "/users?$filter=accountEnabled eq True"
+	var marsh struct {
+		Users Users `json:"value"`
+	}
+	err := g.makeGETAPICall(resource, nil, &marsh)
+	marsh.Users.setGraphClient(g)
+	return marsh.Users, err
+}
+
 // ListGroups returns a list of all groups
 //
 // Reference: https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/group_list
