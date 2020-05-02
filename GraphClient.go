@@ -166,11 +166,11 @@ func (g *GraphClient) ListUsers() (Users, error) {
 	return marsh.Users, err
 }
 
-// GetAccountEnabledUsers returns a list of all users with the "accountEnabled" flag set to true
+// ListAccountEnabledUsers returns a list of all users with the "accountEnabled" flag set to true
 //
 // Reference: https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/user_list
 func (g *GraphClient) ListAccountEnabledUsers() (Users, error) {
-	resource := "/users?$filter=accountEnabled eq True"
+	resource := "/users?$filter=accountEnabled eq true"
 	var marsh struct {
 		Users Users `json:"value"`
 	}
