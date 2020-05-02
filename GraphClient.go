@@ -170,7 +170,12 @@ func (g *GraphClient) ListUsers() (Users, error) {
 //
 // Reference: https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/user_list
 func (g *GraphClient) ListAccountEnabledUsers() (Users, error) {
-	resource := "/users?$filter=accountEnabled eq true"
+	// resource := fmt.Sprintf("%s?%s", "/users", url.QueryEscape("$filter=accountEnabled eq true"))
+	resource := "/users"
+
+	v := url.Values{}
+	v.Set("$filter", "accountEnabled eq true")
+
 	var marsh struct {
 		Users Users `json:"value"`
 	}
