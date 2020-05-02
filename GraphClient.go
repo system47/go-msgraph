@@ -179,7 +179,7 @@ func (g *GraphClient) ListAccountEnabledUsers() (Users, error) {
 	var marsh struct {
 		Users Users `json:"value"`
 	}
-	err := g.makeGETAPICall(resource, nil, &marsh)
+	err := g.makeGETAPICall(resource, v, &marsh)
 	marsh.Users.setGraphClient(g)
 	return marsh.Users, err
 }
